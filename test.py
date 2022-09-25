@@ -3,6 +3,229 @@ import unittest
 import math
 
 
+
+'''
+Create a function which answers the question "Are you playing banjo?".
+If your name starts with the letter "R" or lower case "r", you are playing banjo!
+
+The function takes a name as its only argument, and returns one of the following strings:
+
+name + " plays banjo" 
+name + " does not play banjo"
+
+Names given are always valid strings.
+'''
+
+def are_you_playing_banjo(name):
+    return f'{name} plays banjo' if name[0].upper() == 'R' else f'{name} does not play banjo'
+
+
+class TestPlayingBingo(unittest.TestCase):
+    @parameterized.expand([
+        ["martin", 'martin does not play banjo'],
+        ["Rikke", 'Rikke plays banjo'],
+        ["rolf", 'rolf plays banjo']
+    ])
+    
+    def test_filter_list(self, name, answer):
+        self.assertEqual(are_you_playing_banjo(name), answer)
+
+
+'''
+Trolls are attacking your comment section!
+
+A common way to deal with this situation is to remove all of the vowels from the trolls' comments, neutralizing the threat.
+
+Your task is to write a function that takes a string and return a new string with all vowels removed.
+
+For example, the string "This website is for losers LOL!" would become "Ths wbst s fr lsrs LL!".
+
+Note: for this kata y isn't considered a vowel.
+'''
+
+def disemvowel(string):
+    return "".join(c for c in string if c.lower() not in "aeiou")
+
+
+class TestDisemvowel(unittest.TestCase):
+    
+    def test_disemvowel(self):
+        self.assertEqual(disemvowel("This website is for losers LOL!"), "Ths wbst s fr lsrs LL!")
+
+
+'''
+In this kata you will create a function that takes a list of non-negative integers and strings and returns a new list with the strings filtered out.
+'''
+
+def filter_list(l):
+    return [number for number in l if type(number) is int]
+
+
+class TestFilterList(unittest.TestCase):
+    @parameterized.expand([
+        [[1, 2, 'a', 'b'], [1, 2]],
+        [[1, 'a', 'b', 0, 15], [1, 0, 15]],
+        [[1, 2, 'aasf', '1', '123', 123], [1, 2, 123]]
+    ])
+    
+    def test_filter_list(self, l, answer):
+        self.assertEqual(filter_list(l), answer)
+
+
+'''
+Create a function that takes an integer as an argument and returns "Even" for even numbers or "Odd" for odd numbers.
+'''
+
+def even_or_odd(number):
+    return 'Even' if number%2 == 0 else 'Odd'
+
+
+class TestEvenOrOdd(unittest.TestCase):
+    @parameterized.expand([
+        [2, 'Even'],
+        [1, 'Odd'],
+        [0, 'Even']
+    ])
+    
+    def test_even_or_odd(self, number, answer):
+        self.assertEqual(even_or_odd(number), answer)
+
+
+'''
+In this simple assignment you are given a number and have to make it negative. But maybe the number is already negative?
+'''
+
+def make_negative( number ):
+    return -abs(number)
+
+
+class TestMakeNegative(unittest.TestCase):
+    @parameterized.expand([
+        [42, -42],
+        [9, -9],
+        [0, 0]
+    ])
+    
+    def test_make_negative(self, string, answer):
+        self.assertEqual(make_negative(string), answer)
+
+'''
+An isogram is a word that has no repeating letters, consecutive or non-consecutive. Implement a function that determines whether a string that contains only letters is an isogram. Assume the empty string is an isogram. Ignore letter case.
+'''
+
+def is_isogram(string):
+    return len(string) == len(set(string.lower()))
+
+
+class TestIsIsogram(unittest.TestCase):
+    @parameterized.expand([
+        ["Dermatoglyphics", True],
+        ["isogram", True],
+        ["aba", False],
+        ["moOse", False],
+        ["", True]
+    ])
+    
+    def test_is_isogram(self, string, answer):
+        self.assertEqual(is_isogram(string), answer)
+
+'''
+We need a function that can transform a string into a number. What ways of achieving this do you know?
+
+Note: Don't worry, all inputs will be strings, and every string is a perfectly valid representation of an integral number.
+
+"1234" --> 1234
+"605"  --> 605
+"1405" --> 1405
+
+'''
+
+def string_to_number(s):
+    return int(s)
+
+
+class TestStringToNumber(unittest.TestCase):
+    @parameterized.expand([
+        ["1234", 1234],
+        ["605", 605],
+        ["-7", -7]
+    ])
+    
+    def test_string_to_number(self, numbers, answer):
+        self.assertEqual(string_to_number(numbers), answer)
+
+
+'''
+Create a function that returns the sum of the two lowest positive numbers given an array of minimum 4 positive integers. No floats or non-positive integers will be passed.
+
+For example, when an array is passed like [19, 5, 42, 2, 77], the output should be 7.
+
+[10, 343445353, 3453445, 3453545353453] should return 3453455.
+'''
+
+def sum_two_smallest_numbers(numbers):
+    return sum(sorted(numbers)[:2])
+
+
+class TestSumTwoSmallest(unittest.TestCase):
+    @parameterized.expand([
+        [[5, 8, 12, 18, 22], 13],
+        [[7, 15, 12, 18, 22], 19],
+        [[25, 42, 12, 18, 22], 30]
+    ])
+    
+    def test_sum_two_smallest_numbers(self, numbers, answer):
+        self.assertEqual(sum_two_smallest_numbers(numbers), answer)
+
+
+'''
+The Western Suburbs Croquet Club has two categories of membership, Senior and Open. They would like your help with an application form that will tell prospective members which category they will be placed.
+
+To be a senior, a member must be at least 55 years old and have a handicap greater than 7. In this croquet club, handicaps range from -2 to +26; the better the player the lower the handicap.
+
+Input
+Input will consist of a list of pairs. Each pair contains information for a single potential member. Information consists of an integer for the person's age and an integer for the person's handicap.
+
+Output
+Output will consist of a list of string values (in Haskell and C: Open or Senior) stating whether the respective member is to be placed in the senior or open category.
+'''
+
+def open_or_senior(data):
+    return ['Senior' if i[0] >= 55 and i[1] > 7 else 'Open' for i in data]
+
+
+class TestOpenSenior(unittest.TestCase):
+    @parameterized.expand([
+        [[(45, 12),(55,21),(19, -2),(104, 20)], ['Open', 'Senior', 'Open', 'Senior']],
+        [[(16, 23),(73,1),(56, 20),(1, -1)], ['Open', 'Open', 'Senior', 'Open']],
+    ])
+    
+    def test_open_or_senior(self, data, answer):
+        self.assertEqual(open_or_senior(data), answer)
+
+
+'''
+You live in the city of Cartesia where all roads are laid out in a perfect grid. You arrived ten minutes too early to an appointment, so you decided to take the opportunity to go for a short walk. The city provides its citizens with a Walk Generating App on their phones -- everytime you press the button it sends you an array of one-letter strings representing directions to walk (eg. ['n', 's', 'w', 'e']). You always walk only a single block for each letter (direction) and you know it takes you one minute to traverse one city block, so create a function that will return true if the walk the app gives you will take you exactly ten minutes (you don't want to be early or late!) and will, of course, return you to your starting point. Return false otherwise.
+
+Note: you will always receive a valid array containing a random assortment of direction letters ('n', 's', 'e', or 'w' only). It will never give you an empty array (that's not a walk, that's standing still!).
+'''
+
+def isValidWalk(walk):
+    return len(walk) == 10 and walk.count('n') == walk.count('s') and walk.count('e') == walk.count('w')
+
+
+class TestValidWalk(unittest.TestCase):
+    @parameterized.expand([
+        [['n','s','n','s','n','s','n','s','n','s'], True],
+        [['w','e','w','e','w','e','w','e','w','e','w','e'], False],
+        [['w'], False],
+        [['n','n','n','s','n','s','n','s','n','s'], False]
+    ])
+    
+    def test_is_valid_walk(self, walk, answer):
+        self.assertEqual(isValidWalk(walk), answer)
+
+
 '''
 A pangram is a sentence that contains every single letter of the alphabet at least once. For example, the sentence "The quick brown fox jumps over the lazy dog" is a pangram, because it uses the letters A-Z at least once (case is irrelevant).
 
