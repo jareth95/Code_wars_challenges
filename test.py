@@ -4,6 +4,34 @@ import math
 
 
 '''
+Ben has a very simple idea to make some profit: he buys something and sells it again. Of course, this wouldn't give him any profit at all if he was simply to buy and sell it at the same price. Instead, he's going to buy it for the lowest possible price and sell it at the highest.
+
+Task
+Write a function that returns both the minimum and maximum number of the given list/array.
+
+Examples (Input --> Output)
+[1,2,3,4,5] --> [1,5]
+[2334454,5] --> [5,2334454]
+[1]         --> [1,1]
+Remarks
+All arrays or lists will always have at least one element, so you don't need to check the length. Also, your function will always get an array or a list, you don't have to check for null, undefined or similar.
+'''
+
+def min_max(lst):
+  return [min(lst), max(lst)]
+
+
+class TestSquareDigits(unittest.TestCase):
+    @parameterized.expand([
+        [[1,2,3,4,5], [1, 5]],
+        [[2334454,5], [5, 2334454]],
+    ])
+    
+    def test_min_max(self, lst, answer):
+        self.assertEqual(min_max(lst), answer)
+
+
+'''
 Welcome. In this kata, you are asked to square every digit of a number and concatenate them.
 
 For example, if we run 9119 through the function, 811181 will come out, because 92 is 81 and 12 is 1.
