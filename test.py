@@ -4,6 +4,21 @@ import math
 
 
 '''
+Build a function that returns an array of integers from n to 1 where n>0.
+
+Example : n=5 --> [5,4,3,2,1]
+'''
+
+def reverse_seq(n):
+    return range(n, 0, -1)
+
+
+class TestReverseSeq(unittest.TestCase):
+    
+    def test_reverse_seq(self):
+        self.assertEqual(reverse_seq(5), [5,4,3,2,1])
+
+'''
 There is a bus moving in the city, and it takes and drop some people in each bus stop.
 
 You are provided with a list (or array) of integer pairs. Elements of each pair represent number of people get into bus (The first item) and number of people get off the bus (The second item) in a bus stop.
