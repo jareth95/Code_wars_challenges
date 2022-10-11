@@ -4,6 +4,25 @@ import math
 
 
 '''
+The main idea is to count all the occurring characters in a string. If you have a string like aba, then the result should be {'a': 2, 'b': 1}.
+
+What if the string is empty? Then the result should be empty object literal, {}.
+'''
+
+def count(string):
+    return {letter: string.count(letter) for letter in string}
+
+
+class TestCount(unittest.TestCase):
+    @parameterized.expand([
+        ['aba', {'a': 2, 'b': 1}],
+        ['', {}],
+    ])
+    
+    def test_check_for_factor(self, string, answer):
+        self.assertEqual(count(string), answer)
+
+'''
 This function should test if the factor is a factor of base.
 
 Return true if it is a factor or false if it is not.
@@ -24,7 +43,7 @@ def check_for_factor(base, factor):
     return base % factor == 0
 
 
-class TestCgeckForFactor(unittest.TestCase):
+class TestCheckForFactor(unittest.TestCase):
     @parameterized.expand([
         [10, 2, True],
         [2450, 5, True],
@@ -35,20 +54,6 @@ class TestCgeckForFactor(unittest.TestCase):
     def test_check_for_factor(self, base, factor, answer):
         self.assertEqual(check_for_factor(base, factor), answer)
 
-'''
-Build a function that returns an array of integers from n to 1 where n>0.
-
-Example : n=5 --> [5,4,3,2,1]
-'''
-
-def reverse_seq(n):
-    return range(n, 0, -1)
-
-
-class TestReverseSeq(unittest.TestCase):
-    
-    def test_reverse_seq(self):
-        self.assertEqual(reverse_seq(5), [5,4,3,2,1])
 
 '''
 There is a bus moving in the city, and it takes and drop some people in each bus stop.
