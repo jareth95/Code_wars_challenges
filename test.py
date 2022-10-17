@@ -4,6 +4,31 @@ import math
 
 
 '''
+Messi is a soccer player with goals in three leagues:
+
+LaLiga
+Copa del Rey
+Champions
+Complete the function to return his total number of goals in all three leagues.
+
+Note: the input will always be valid.
+
+For example:
+
+5, 10, 2  -->  17
+'''
+
+def goals(*args):
+    return sum(args)
+
+
+class TestCount(unittest.TestCase):
+    
+    def test_goals(self):
+        self.assertEqual(goals(5, 10, 2), 17)
+
+
+'''
 The main idea is to count all the occurring characters in a string. If you have a string like aba, then the result should be {'a': 2, 'b': 1}.
 
 What if the string is empty? Then the result should be empty object literal, {}.
